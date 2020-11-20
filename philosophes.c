@@ -1,7 +1,6 @@
 //
 // Created by Shadow on 11/12/2020.
 //
-
 #include "philosophes.h"
 #include <pthread.h>
 #include <semaphore.h>
@@ -33,16 +32,18 @@ sem_t* sems;        //Tableau de sémaphores
 
 
 /*
- * Point d'entré des threads
+ * Point d'entrée des threads
  * @arg: Pointer vers l'id du philosophe
- * Le philosophe avec l'id défini par arg a effectué ITTERATIONS cycle
  */
 void *philosophing(void *arg){
     int *i = (int*) arg;
-    while((&phils[*i])->counter<=ITTERATIONS){
+    while((&phils[*i])->counter<ITTERATIONS){
         take_forks(*i);
         put_forks(*i);
     }
+    check((*i+1)%n); 
+    check((*i-1)%n); 
+
 }
 
 /*
@@ -52,10 +53,10 @@ void *philosophing(void *arg){
 void take_forks(int i){
     sem_wait(&semaphore);
     (&phils[i])->state = HUNGRY;
-    //printf("Philosopher %i a faim\n",i);
     check(i);
     sem_post(&semaphore);
     sem_wait(&sems[i]);
+    (&phils[i])->state = EATING;
 }
 
 /*
@@ -64,9 +65,8 @@ void take_forks(int i){
  * Le compteur du philosphe est incrémenté.
  */
 void put_forks(int i){
-    sem_wait(&semaphore);
     (&phils[i])->state = THINKING;
-    //printf("Philosopher %i pense\n",i);
+    sem_wait(&semaphore);
     check((i+1)%n); //On vérifie si le voisin de droite est maintenant capable de manger
     check((i-1)%n); //On vérifie si le voisin de gauche est maintenant capable de mander
     (&phils[i])->counter ++;
@@ -78,8 +78,6 @@ void put_forks(int i){
  */
 void check(int i){
     if((&phils[i])->state == HUNGRY && (&phils[(i-1)%n])->state != EATING &&  (&phils[(i+1)%n])->state != EATING){
-        (&phils[i])->state = EATING;
-        //printf("Philosopher %i mange \n",i);
         sem_post(&sems[i]); //Le philosophe est maintenant capable de manger
     }
 }
@@ -88,22 +86,21 @@ void check(int i){
  * @arg: nombre de threads(philosophes) utilisés
  */
 int launch_threads(int arg){
-    n = arg;                                           //Nombre de threads(philosophes) demandés
-    phils = malloc(sizeof(struct phil_struct)*n); //Tableau contenant l'ensemble des philosophes
-    sems = malloc(sizeof(sem_t)*n);               //Tableau contenant l'ensemble des sémaphores propres à chaque philosophe
+    n = arg;                                          //Nombre de threads(philosophes) demandés
+    pthread_t *threads = malloc(sizeof(pthread_t)*n); //Tableau contenant l'ensemble des threads des philsophes
+    phils = malloc(sizeof(struct phil_struct)*n);     //Tableau contenant l'ensemble des philosophes
+    sems = malloc(sizeof(sem_t)*n);                   //Tableau contenant l'ensemble des sémaphores propres à chaque philosophe
     sem_init(&semaphore,0,1);
 
-    //Initialisation des philosophes et des sémaphores
+    //Init des philosophes
     for(int i=0;i<n;i++){
         philosophe p = {i,0,THINKING};
         phils[i] = p;
         sem_init(&sems[i],0,1);
     }
-
+    
     //Création des threads
-    pthread_t *threads = malloc(sizeof(pthread_t)*n);
     for(int i=0;i<n;i++){
-        //printf("Create thread %i et id %i\n",i,(&phils[i])->id);
         pthread_create(&threads[i],NULL,philosophing,&(&phils[i])->id);
     }
 
@@ -111,9 +108,12 @@ int launch_threads(int arg){
     for(int i=0;i<n;i++){
         pthread_join(threads[i],NULL);
     }
+
     //La mémoire qui a été malloc est libérée
     free(phils);
     free(sems);
+    free(threads);
+    printf("Ended\n");
     return 0;
 }
 
@@ -121,4 +121,5 @@ int main(int argc, char *argv[]){
     int a = atoi(argv[1]);
     printf("%i",a);
     launch_threads(a);
+    return 0;
 }

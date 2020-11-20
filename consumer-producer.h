@@ -10,5 +10,5 @@ int get_random();
 void *insertItem(int);
 void *produce();
 void *consume();
-void *work();
+void work();
 int launch_threads(int,int);
