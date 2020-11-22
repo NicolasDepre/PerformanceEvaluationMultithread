@@ -7,20 +7,29 @@ pthread_mutex_t mutex;
 pthread_t* readers;
 pthread_t* writers;
 int value = 5;
-
+int read = 0;
+int written = 0;
+void *work(){
+    while(rand()<RAND_MAX/10000);
+}
 void *writing(){
-    while(1){
+    while(written<624){
         pthread_rwlock_wrlock(&rwlock);
-        printf("Value changed\n");
+        written++;
         pthread_rwlock_unlock(&rwlock);
+        work();
     }
 }
 void *reading(){
-    while(1) {
+    while(read<2560){
         pthread_rwlock_rdlock(&rwlock);
+        read++;
         pthread_rwlock_unlock(&rwlock);
+        work();
     }
 }
+
+
 
 void launch_threads(int r, int w){
     readers = malloc(sizeof(pthread_t)*r);
