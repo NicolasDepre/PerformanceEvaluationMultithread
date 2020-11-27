@@ -3,10 +3,8 @@
 #include <pthread.h>
 
 pthread_rwlock_t rwlock;
-pthread_mutex_t mutex;
 pthread_t* readers;
 pthread_t* writers;
-int value = 5;
 int read = 0;
 int written = 0;
 void *work(){
@@ -29,15 +27,11 @@ void *reading(){
     }
 }
 
-
-
-void launch_threads(int r, int w){
-    readers = malloc(sizeof(pthread_t)*r);
-    writers = malloc(sizeof(pthread_t)*w);
+int launch_threads(int r, int w){
+    if(!(readers = malloc(sizeof(pthread_t)*r))) return 1;
+    if(!(writers = malloc(sizeof(pthread_t)*w))) return 1;
     pthread_rwlock_init(&rwlock,NULL);
-    //Launching readers
-    printf("%i %i\n",r,w);
-    printf("Launching writers\n");
+
     for(int i = 0; i<w;i++){
         pthread_create(&writers[i],NULL,writing,NULL);
         printf("Thread launched\n");
@@ -46,6 +40,7 @@ void launch_threads(int r, int w){
     for(int i = 0; i<r;i++){
         pthread_create(&readers[i],NULL,reading,NULL);
     }
+    printf("Joining threads");b
     for(int i=0;i<w;i++){
         pthread_join(writers[i],NULL);
     }
@@ -53,8 +48,9 @@ void launch_threads(int r, int w){
         pthread_join(readers[r],NULL);
     }
     printf("Joined");
-
-    //Joining threads
+    free(readers);
+    free(writers);
+    pthread_rwlock_destroy(&rwlock);
 }
 
 int main(int argc, char *argv[]){

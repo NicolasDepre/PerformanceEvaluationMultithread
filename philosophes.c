@@ -85,8 +85,7 @@ void check(int i){
  * Fonction qui lance la simulation du problème des philosophes
  * @arg: nombre de threads(philosophes) utilisés
  */
-int launch_threads(int arg){
-    n = arg;                                          //Nombre de threads(philosophes) demandés
+int launch_threads(int n){     //Nombre de threads(philosophes) demandés
     pthread_t *threads = malloc(sizeof(pthread_t)*n); //Tableau contenant l'ensemble des threads des philsophes
     phils = malloc(sizeof(struct phil_struct)*n);     //Tableau contenant l'ensemble des philosophes
     sems = malloc(sizeof(sem_t)*n);                   //Tableau contenant l'ensemble des sémaphores propres à chaque philosophe
