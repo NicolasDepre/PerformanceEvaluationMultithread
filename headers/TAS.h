@@ -1,11 +1,10 @@
-//
-// Created by Shadow on 11/20/2020.
-//
-
 #ifndef PERFORMANCEEVALUATIONMULTITHREAD_TESTANDSET_H
 #define PERFORMANCEEVALUATIONMULTITHREAD_TESTANDSET_H
 #include <stdlib.h>
-typedef struct sl spinLock;
+typedef struct spinLock{
+    int val;        //Etat du verrou
+} spinLock;
+
 int spinlock_init(spinLock**);
 void spinlock_lock(spinLock**);
 void spinlock_unlock(spinLock**);

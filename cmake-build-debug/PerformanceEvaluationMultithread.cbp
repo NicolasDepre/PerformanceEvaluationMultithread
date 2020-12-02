@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="PerformanceEvaluationMultithread"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="C:/Users/Shadow/CLionProjects/PerformanceEvaluationMultithread/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/Users/Shadow/Documents/gcc/bin/mingw32-make.exe -f &quot;C:/Users/Shadow/CLionProjects/PerformanceEvaluationMultithread/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="C:/Users/Shadow/Documents/gcc/bin/mingw32-make.exe -f &quot;C:/Users/Shadow/CLionProjects/PerformanceEvaluationMultithread/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Users/Shadow/Documents/gcc/bin/mingw32-make.exe -f &quot;C:/Users/Shadow/CLionProjects/PerformanceEvaluationMultithread/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Users/Shadow/Documents/gcc/bin/mingw32-make.exe -f &quot;C:/Users/Shadow/CLionProjects/PerformanceEvaluationMultithread/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="C:/Users/Shadow/CLionProjects/PerformanceEvaluationMultithread/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/Users/Shadow/Documents/gcc/bin/mingw32-make.exe -f &quot;C:/Users/Shadow/CLionProjects/PerformanceEvaluationMultithread/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="C:/Users/Shadow/Documents/gcc/bin/mingw32-make.exe -f &quot;C:/Users/Shadow/CLionProjects/PerformanceEvaluationMultithread/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Users/Shadow/Documents/gcc/bin/mingw32-make.exe -f &quot;C:/Users/Shadow/CLionProjects/PerformanceEvaluationMultithread/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Users/Shadow/Documents/gcc/bin/mingw32-make.exe -f &quot;C:/Users/Shadow/CLionProjects/PerformanceEvaluationMultithread/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="PerformanceEvaluationMultithread">
+				<Option output="C:/Users/Shadow/CLionProjects/PerformanceEvaluationMultithread/cmake-build-debug/PerformanceEvaluationMultithread.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/Shadow/CLionProjects/PerformanceEvaluationMultithread/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/Users/Shadow/Documents/gcc/include"/>
+					<Add directory="c:\users\shadow\documents\gcc\bin\../lib64/gcc/x86_64-w64-mingw32/4.8.3/include"/>
+					<Add directory="c:\users\shadow\documents\gcc\bin\../lib64/gcc/x86_64-w64-mingw32/4.8.3/include-fixed"/>
+					<Add directory="c:\users\shadow\documents\gcc\bin\../lib64/gcc/x86_64-w64-mingw32/4.8.3/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/Users/Shadow/Documents/gcc/bin/mingw32-make.exe -f &quot;C:/Users/Shadow/CLionProjects/PerformanceEvaluationMultithread/cmake-build-debug/Makefile&quot;  VERBOSE=1 PerformanceEvaluationMultithread"/>
+					<CompileFile command="C:/Users/Shadow/Documents/gcc/bin/mingw32-make.exe -f &quot;C:/Users/Shadow/CLionProjects/PerformanceEvaluationMultithread/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Users/Shadow/Documents/gcc/bin/mingw32-make.exe -f &quot;C:/Users/Shadow/CLionProjects/PerformanceEvaluationMultithread/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Users/Shadow/Documents/gcc/bin/mingw32-make.exe -f &quot;C:/Users/Shadow/CLionProjects/PerformanceEvaluationMultithread/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="PerformanceEvaluationMultithread/fast">
+				<Option output="C:/Users/Shadow/CLionProjects/PerformanceEvaluationMultithread/cmake-build-debug/PerformanceEvaluationMultithread.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/Shadow/CLionProjects/PerformanceEvaluationMultithread/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/Users/Shadow/Documents/gcc/include"/>
+					<Add directory="c:\users\shadow\documents\gcc\bin\../lib64/gcc/x86_64-w64-mingw32/4.8.3/include"/>
+					<Add directory="c:\users\shadow\documents\gcc\bin\../lib64/gcc/x86_64-w64-mingw32/4.8.3/include-fixed"/>
+					<Add directory="c:\users\shadow\documents\gcc\bin\../lib64/gcc/x86_64-w64-mingw32/4.8.3/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/Users/Shadow/Documents/gcc/bin/mingw32-make.exe -f &quot;C:/Users/Shadow/CLionProjects/PerformanceEvaluationMultithread/cmake-build-debug/Makefile&quot;  VERBOSE=1 PerformanceEvaluationMultithread/fast"/>
+					<CompileFile command="C:/Users/Shadow/Documents/gcc/bin/mingw32-make.exe -f &quot;C:/Users/Shadow/CLionProjects/PerformanceEvaluationMultithread/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Users/Shadow/Documents/gcc/bin/mingw32-make.exe -f &quot;C:/Users/Shadow/CLionProjects/PerformanceEvaluationMultithread/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Users/Shadow/Documents/gcc/bin/mingw32-make.exe -f &quot;C:/Users/Shadow/CLionProjects/PerformanceEvaluationMultithread/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="C:/Users/Shadow/CLionProjects/PerformanceEvaluationMultithread/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/Users/Shadow/Documents/gcc/bin/mingw32-make.exe -f &quot;C:/Users/Shadow/CLionProjects/PerformanceEvaluationMultithread/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="C:/Users/Shadow/Documents/gcc/bin/mingw32-make.exe -f &quot;C:/Users/Shadow/CLionProjects/PerformanceEvaluationMultithread/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Users/Shadow/Documents/gcc/bin/mingw32-make.exe -f &quot;C:/Users/Shadow/CLionProjects/PerformanceEvaluationMultithread/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Users/Shadow/Documents/gcc/bin/mingw32-make.exe -f &quot;C:/Users/Shadow/CLionProjects/PerformanceEvaluationMultithread/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="C:/Users/Shadow/CLionProjects/PerformanceEvaluationMultithread/TestAndSetTest.c">
+			<Option target="PerformanceEvaluationMultithread"/>
+		</Unit>
+		<Unit filename="C:/Users/Shadow/CLionProjects/PerformanceEvaluationMultithread/TestAndTestAndSet.c">
+			<Option target="PerformanceEvaluationMultithread"/>
+		</Unit>
+		<Unit filename="C:/Users/Shadow/CLionProjects/PerformanceEvaluationMultithread/TestAndTestAndSet.h">
+			<Option target="PerformanceEvaluationMultithread"/>
+		</Unit>
+		<Unit filename="C:/Users/Shadow/CLionProjects/PerformanceEvaluationMultithread/consumer-producer.c">
+			<Option target="PerformanceEvaluationMultithread"/>
+		</Unit>
+		<Unit filename="C:/Users/Shadow/CLionProjects/PerformanceEvaluationMultithread/consumer-producer.h">
+			<Option target="PerformanceEvaluationMultithread"/>
+		</Unit>
+		<Unit filename="C:/Users/Shadow/CLionProjects/PerformanceEvaluationMultithread/main.c">
+			<Option target="PerformanceEvaluationMultithread"/>
+		</Unit>
+		<Unit filename="C:/Users/Shadow/CLionProjects/PerformanceEvaluationMultithread/philosophes.c">
+			<Option target="PerformanceEvaluationMultithread"/>
+		</Unit>
+		<Unit filename="C:/Users/Shadow/CLionProjects/PerformanceEvaluationMultithread/philosophes.h">
+			<Option target="PerformanceEvaluationMultithread"/>
+		</Unit>
+		<Unit filename="C:/Users/Shadow/CLionProjects/PerformanceEvaluationMultithread/testAndSet.c">
+			<Option target="PerformanceEvaluationMultithread"/>
+		</Unit>
+		<Unit filename="C:/Users/Shadow/CLionProjects/PerformanceEvaluationMultithread/testAndSet.h">
+			<Option target="PerformanceEvaluationMultithread"/>
+		</Unit>
+		<Unit filename="C:/Users/Shadow/CLionProjects/PerformanceEvaluationMultithread/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

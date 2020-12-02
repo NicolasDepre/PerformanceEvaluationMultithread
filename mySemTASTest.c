@@ -1,11 +1,13 @@
-//
-// Created by Shadow on 11/22/2020.
-//
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
 #include "headers/mySemTAS.h"
+
+/*
+ * Fichier de test pour l'évaluation des performances de .c
+ */
+
 mySem* s;
 
 void* test(){

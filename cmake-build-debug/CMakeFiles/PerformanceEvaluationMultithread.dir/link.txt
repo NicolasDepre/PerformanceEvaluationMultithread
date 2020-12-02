@@ -1,0 +1,3 @@
+"C:\Program Files\JetBrains\CLion 2020.2.4\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\PerformanceEvaluationMultithread.dir/objects.a
+C:\Users\Shadow\Documents\gcc\bin\ar.exe cr CMakeFiles\PerformanceEvaluationMultithread.dir/objects.a @CMakeFiles\PerformanceEvaluationMultithread.dir\objects1.rsp
+C:\Users\Shadow\Documents\gcc\bin\gcc.exe -g   -Wl,--whole-archive CMakeFiles\PerformanceEvaluationMultithread.dir/objects.a -Wl,--no-whole-archive  -o PerformanceEvaluationMultithread.exe -Wl,--out-implib,libPerformanceEvaluationMultithread.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\PerformanceEvaluationMultithread.dir\linklibs.rsp

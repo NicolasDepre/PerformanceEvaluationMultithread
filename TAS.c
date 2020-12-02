@@ -1,15 +1,16 @@
-#include "headers/testAndSet.h"
+#include "headers/TAS.h"
+/*
+ * Implémentation d'un verrou à attente active TEST AND SET (TAS)
+ */
 
-typedef struct sl{
-    int val;        //Etat du verrou
-} spinLock;
+
 
 /*
  * Initiation d'un verrou à attente active
  * Malloc des variables nécessaires
  */
-void spinlock_init(spinLock** lock){
-    if(!(*lock = malloc(sizeof(spinLock))) return -1;
+int spinlock_init(spinLock** lock){
+    *lock = malloc(sizeof(spinLock));
     (*lock)->val=0;
     return 0;
 }
@@ -27,7 +28,6 @@ void spinlock_lock(spinLock** lock) {
         :"m" ((*lock)->val)
         );
     }
-
 }
 
 /*

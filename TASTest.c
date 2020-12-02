@@ -1,16 +1,23 @@
 //
 // Created by Shadow on 11/21/2020.
 //
-#include "headers/TestAndTestAndSet.h"
+#include "headers/TAS.h"
 #include <stdlib.h>
 #include <pthread.h>
 int counter = 6400;
 spinLock* l;
+
+/*
+ * Programme qui test l'efficacité des verrous implémentés dans le fichier TAS.C
+ */
+
 typedef struct{
     pthread_t thread;
     int counter;
     int id;
 }ThreadC;
+
+
 ThreadC* threads;
 void work(){
     while(rand()>RAND_MAX/10000);

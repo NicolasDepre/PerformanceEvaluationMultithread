@@ -1,8 +1,7 @@
 #include "headers/reader-writersTATAS.h"
 
-
 /*
- * Implémentation du problème des lecteurs-écrivains sur base des verrous TAS.c (basé sur le code du TP)
+ * Implémentation du problème des lecteurs-écrivains sur base des verrous TATAS.c (basé sur le code du TP)
  */
 int readcount = 0;
 int writecount = 0;
@@ -70,7 +69,7 @@ void* read(){
         spinlock_lock(&rc);
         readcount--;
         if (readcount == 0){
-            sem_post(&wsem);
+            mySem_post(&wsem);
         }
         spinlock_unlock(&rc);
     }
@@ -79,37 +78,37 @@ void* read(){
 int launch_threads(int r, int w){
 
     //Initialisation mutex et semaphores
-    if (!(spinlock_init(&rc))) return -1;
-    if (!(spinlock_init(&wc))) return -1;
-    if (!(mySem_init(&rsem,1))) return -1;
-    if (!(mySem_init(&wsem,1))) return -1;
+    spinlock_init(&rc);
+    spinlock_init(&wc);
+    mySem_init(&rsem,1);
+    mySem_init(&wsem,1);
 
     pthread_t writers[w];
     //Création des threads
     for (int i = 0; i < w; i++){
-        if (pthread_create(&(writers[i]),NULL, (void *) write,NULL) != 0) return -3;
+        pthread_create(&(writers[i]),NULL, (void *) write,NULL);
     }
 
     pthread_t readers[r];
-    for (int i = 0; i < r; i++){
-        if (pthread_create(&(readers[i]),NULL, (void *) read,NULL) != 0) return -3;
+    for (int i = 0; i < w; i++){
+        pthread_create(&(readers[i]),NULL, (void *) read,NULL);
     }
 
     //Join des threads
-    for (int i = 0; i < w; i++){
-        if (pthread_join((writers[i]),NULL) != 0) return -4;
+    for (int i = 0; i < r; i++){
+        pthread_join((writers[i]),NULL);
     }
 
     for (int i = 0; i < r; i++){
-        if (pthread_join((readers[i]),NULL) != 0) return -4;
+        pthread_join((readers[i]),NULL);
     }
 
     //Destruction sémaphores et mutex
-    if (!(spinlock_destroy(&wc)))return -1;
-    if (!(spinlock_destroy(&rc))) return -1;
+    spinlock_destroy(&wc);
+    spinlock_destroy(&rc);
 
-    if (!(mySem_destroy(&wsem))) return -1;
-    if (!(mySem_destroy(&rsem))) return -1;
+    mySem_destroy(&wsem);
+    mySem_destroy(&rsem);
     return 0;
 
 }

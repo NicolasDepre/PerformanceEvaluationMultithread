@@ -1,5 +1,9 @@
 #include "headers/TATAS.h"
 
+/*
+ * Implémentation d'un verrou à attente active TEST AND TEST AND SET (TATAS)
+ */
+
 typedef struct sl{
     int val;        //Etat du verrou
 } spinLock;
@@ -8,8 +12,8 @@ typedef struct sl{
  * Initiation d'un verrou à attente active
  * Malloc des variables nécessaires
  */
-void spinlock_init(spinLock** lock){
-    if(!(*lock = malloc(sizeof(spinLock)))return -1;
+int spinlock_init(spinLock** lock){
+    *lock = malloc(sizeof(spinLock));
     (*lock)->val=0;
     return 0;
 }

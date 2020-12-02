@@ -1,14 +1,16 @@
-//
-// Created by Shadow on 11/13/2020.
-//
-
 #ifndef PERFORMANCEEVALUATIONMULTITHREAD_CONSUMER_PRODUCER_H
 #define PERFORMANCEEVALUATIONMULTITHREAD_CONSUMER_PRODUCER_H
+#include <pthread.h>
+#include <semaphore.h>
+#include <stdlib.h>
 
-#endif //PERFORMANCEEVALUATIONMULTITHREAD_CONSUMER_PRODUCER_H
+#define BUFFER_SIZE  8
+#define DATA_SIZE    10000
+
 int get_random();
 void *insertItem(int);
 void *produce();
 void *consume();
 void work();
 int launch_threads(int,int);
+#endif //PERFORMANCEEVALUATIONMULTITHREAD_CONSUMER_PRODUCER_H

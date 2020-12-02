@@ -1,24 +1,19 @@
 #include "headers/mySemTAS.h"
-
 /*
  * Sémaphore basée sur le verrou à attente active TEST AND SET (TAS.c)
  */
 
-typedef struct s{
-    int queu;       //Valeur de la sémaphore
-    spinLock  *l;   //Verrou
-    spinLock *mod;
-}mySem;
+
 
 /*
  * Initialisation de la sémamphore
  * Malloc des variables nécessaires
  */
 int mySem_init(mySem** sem,int n){
-    if(!(*sem = malloc(sizeof(mySem)))) return -1;
+    *sem = malloc(sizeof(mySem));
     (*sem)->queu = n;
-    if(!(spinlock_init(&(*sem)->mod)) return -1;
-    if(!(spinlock_init(&(*sem)->l)) return -1;
+    spinlock_init(&(*sem)->mod);
+    spinlock_init(&(*sem)->l);
     return 0;
 }
 
@@ -37,7 +32,7 @@ void mySem_wait(mySem** sem){
 /*
  * Libère la sémaphore de 1 (queue += 1)
  */
-void mySem_Post(mySem** sem){
+void mySem_post(mySem** sem){
     spinlock_lock(&(*sem)->mod);
     (*sem)->queu++;
     spinlock_unlock(&(*sem)->mod);
@@ -47,7 +42,7 @@ void mySem_Post(mySem** sem){
  * Free les variables utilisées
  */
 void mySem_destroy(mySem** sem){
-    spinlock_destroy((*sem)->mod);
-    spinlock_destroy((*sem)->l);
+    spinlock_destroy(&(*sem)->mod);
+    spinlock_destroy(&(*sem)->l);
     free(*sem);
 }
