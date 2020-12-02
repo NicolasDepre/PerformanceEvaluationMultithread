@@ -1,24 +1,17 @@
-//
-// Created by Shadow on 11/13/2020.
-//
-#include "consumer-producer.h"
-#include <pthread.h>
-#include <semaphore.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#define BUFFER_SIZE  8
-#define DATA_SIZE    10000
+#include "headers/consumer-producer.h"
 
-//pthread_mutex_t mutex;
+/*
+ * Implémentation du problème des producteurs-consommateurs
+ */
+
 pthread_t *producers;
 pthread_t * consumers;
 
 sem_t full, empty,mutex;
 
-int buffer[BUFFER_SIZE];            
-int consumed = DATA_SIZE;
-int produced = DATA_SIZE;
+int *buffer; // 8
+int consumed = DATA_SIZE; //10 000
+int produced = DATA_SIZE; //10 000
 int iIndex =0;
 int rIndex =0;
 
@@ -30,7 +23,7 @@ int get_random(){
     }return i;
 }
 
-//Insère @item dans le buffer 
+//Insère item dans le buffer à un place libre
 void *insertItem(int item){
     buffer[iIndex%BUFFER_SIZE]=item;
     iIndex++;
@@ -44,11 +37,12 @@ void delete(){
 
 //Point d'entrée pour les threads producers
 void *produce(){
-    while(consumed!=0) {
+    while(1) {
         int item = get_random();
         sem_wait(&full); //Il y a une place de moins de disponible dans le buffer;
         sem_wait(&mutex);
         if(produced==0){
+            sem_post(&full);
             sem_post(&empty);
             sem_post(&mutex);
             break;
@@ -66,12 +60,13 @@ void *produce(){
 
 //Point d'entrée pour les threads consumers
 void *consume(){
-    while(consumed!=0){
+    while(1){
         sem_wait(&empty);
         sem_wait(&mutex);
         if(consumed==0){
-            sem_post(&mutex);
+            sem_post(&empty);
             sem_post(&full);
+            sem_post(&mutex);
             break;
         }
         //printf("Cons: %i\n",consumed);
@@ -85,19 +80,16 @@ void *consume(){
 
 //Simule un traitement utilisant le CPU
 void work(){
-    //printf("WORKKKK\n");
     while(rand()>RAND_MAX/10000);
-    //sleep(1);
-    //printf("END WORKING\n");
 }
 
 
 int launch_threads(int prods, int cons){
 
     //Malloc les tableaux
-    producers = malloc(sizeof(pthread_t)*prods);
-    consumers = malloc(sizeof(pthread_t)*cons);
-    //buffer = malloc(sizeof(int)*BUFFER_SIZE);
+    if(!(producers = malloc(sizeof(pthread_t)*prods)))return -1;
+    if(!(consumers = malloc(sizeof(pthread_t)*cons)))return -1;
+    if(!(buffer = malloc(sizeof(int)*BUFFER_SIZE)))return -1;
 
     //Initiation des mutex et sémaphores
     sem_init(&mutex,0,1);
@@ -110,7 +102,7 @@ int launch_threads(int prods, int cons){
     }
     //Consumers Threads
      for(int i=0;i<cons;i++){
-         pthread_create(&consumers[i],NULL,consume,NULL);
+        pthread_create(&consumers[i],NULL,consume,NULL);
      }
 
     //Join threads
@@ -122,12 +114,11 @@ int launch_threads(int prods, int cons){
 
      }
 
-     //TODO Clean mutex and semaphores
+     //Destroy and free variable
      sem_destroy(&empty);
      sem_destroy(&full);
      free(producers);
      free(consumers);
-     printf("Exécution terminée avec %i données consommées et %i données produites\n",DATA_SIZE-consumed,DATA_SIZE-produced);
      return 0;
 }
 

@@ -1,13 +1,4 @@
-//
-// Created by Shadow on 11/12/2020.
-//
-#include "philosophes.h"
-#include <pthread.h>
-#include <semaphore.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-
+#include "headers/philosophes.h"
 #define ITTERATIONS 10000  //Nombre d'opérations manger/penser effectuées par chaque philosophe
 
 //Structure qui reprend les 3 états possibles d'un philosophe
@@ -42,7 +33,7 @@ void *philosophing(void *arg){
         put_forks(*i);
     }
     check((*i+1)%n); 
-    check((*i-1)%n); 
+    check((*i-1)%n);
 
 }
 
@@ -83,26 +74,27 @@ void check(int i){
 }
 /*
  * Fonction qui lance la simulation du problème des philosophes
- * @arg: nombre de threads(philosophes) utilisés
+ * @n: nombre de threads(philosophes) utilisés
  */
-int launch_threads(int n){     //Nombre de threads(philosophes) demandés
-    pthread_t *threads = malloc(sizeof(pthread_t)*n); //Tableau contenant l'ensemble des threads des philsophes
-    phils = malloc(sizeof(struct phil_struct)*n);     //Tableau contenant l'ensemble des philosophes
-    sems = malloc(sizeof(sem_t)*n);                   //Tableau contenant l'ensemble des sémaphores propres à chaque philosophe
+int launch_threads(int size){
+    n = size;
+    pthread_t *threads;
+    if(!(threads = malloc(sizeof(pthread_t)*n)))return -1;                //Tableau contenant l'ensemble des threads des philsophes
+    if(!(phils = malloc(sizeof(struct phil_struct)*n)))return -1;     //Tableau contenant l'ensemble des philosophes
+    if(!(sems = malloc(sizeof(sem_t)*n)))return -1;                        //Tableau contenant l'ensemble des sémaphores propres à chaque philosophe
+
     sem_init(&semaphore,0,1);
 
     //Init des philosophes
     for(int i=0;i<n;i++){
         philosophe p = {i,0,THINKING};
         phils[i] = p;
-        sem_init(&sems[i],0,1);
+        sem_init(&(sems[i]),0,1);
     }
-    
     //Création des threads
     for(int i=0;i<n;i++){
         pthread_create(&threads[i],NULL,philosophing,&(&phils[i])->id);
     }
-
     //Join de l'ensemble des threads
     for(int i=0;i<n;i++){
         pthread_join(threads[i],NULL);
@@ -112,13 +104,11 @@ int launch_threads(int n){     //Nombre de threads(philosophes) demandés
     free(phils);
     free(sems);
     free(threads);
-    printf("Ended\n");
     return 0;
 }
 
 int main(int argc, char *argv[]){
-    int a = atoi(argv[1]);
-    printf("%i",a);
+    int a = atoi((const char*) argv[1]);
     launch_threads(a);
     return 0;
 }
