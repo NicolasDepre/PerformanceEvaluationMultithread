@@ -40,7 +40,7 @@ int launch_threads(int r, int w){
     for(int i = 0; i<r;i++){
         pthread_create(&readers[i],NULL,reading,NULL);
     }
-    printf("Joining threads");b
+    printf("Joining threads");
     for(int i=0;i<w;i++){
         pthread_join(writers[i],NULL);
     }
